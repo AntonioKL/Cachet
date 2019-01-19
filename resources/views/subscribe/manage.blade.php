@@ -16,7 +16,7 @@
             <h1>{{ $appName }} {{ trans('cachet.subscriber.manage.notifications') }}</h1>
             <p>{{ trans('cachet.subscriber.manage.notifications_for') }} <strong>{{ $subscriber->email }}</strong></p>
             <p>{{ trans('cachet.subscriber.manage.notifications_slack') }} <strong>{{ $subscriber->slack_webhook_url }}</strong></p>
-            <form action="{{ cachet_route('subscribe.manage', [$subscriber->verify_code], 'post') }}" method="post">
+            <form action="{{ cachet_route('subscribe.slack_manage', [$subscriber->verify_code], 'post') }}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
                     <label>{{ trans('cachet.subscriber.manage.notifications_slack') }}</label>
@@ -25,7 +25,7 @@
                 </div>
             </form>
         </div>
-        <form action="{{ cachet_route('subscribe.slack_manage', [$subscriber->verify_code], 'post') }}" method="post">
+        <form action="{{ cachet_route('subscribe.manage', [$subscriber->verify_code], 'post') }}" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             @if($componentGroups->isNotEmpty() || $ungroupedComponents->isNotEmpty())
             @foreach($componentGroups as $componentGroup)
