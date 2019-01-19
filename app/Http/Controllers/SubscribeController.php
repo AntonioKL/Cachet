@@ -214,7 +214,7 @@ class SubscribeController extends Controller
         }
 
         return cachet_redirect('subscribe.manage', $subscriber->verify_code)
-            ->withSuccess(sprintf('%s %s', trans('dashboard.notifications.awesome'), trans('cachet.subscriber.email.subscribed')));
+            ->withSuccess(sprintf('%s %s', trans('dashboard.notifications.awesome'), trans('cachet.subscriber.manage.updated_subscription')));
     }
 
     /**
@@ -246,7 +246,7 @@ class SubscribeController extends Controller
         }
 
         return cachet_redirect('subscribe.manage', $subscriber->verify_code)
-            ->withSuccess(sprintf('%s %s', trans('dashboard.notifications.awesome'), trans('cachet.subscriber.email.subscribed')));
+            ->withSuccess(sprintf('%s %s', trans('dashboard.notifications.awesome'), trans('cachet.subscriber.manage.updated_slack')));
     }
     
     
