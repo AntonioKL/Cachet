@@ -89,6 +89,8 @@ return [
             'update_subscription' => 'Update Subscription',
             'my_subscriptions'    => 'You\'re currently subscribed to the following updates.',
             'manage_at_link'      => 'Manage your subscriptions at :link',
+            'updated_slack'       => 'Slack Hook has been updated',
+            'updated_subscription'=> 'Subscribtions have been updated',
         ],
         'email' => [
             'subscribe'          => 'Subscribe to email updates.',
