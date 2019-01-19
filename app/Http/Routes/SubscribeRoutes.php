@@ -56,7 +56,10 @@ class SubscribeRoutes
                 'as'   => 'post:subscribe.manage',
                 'uses' => 'SubscribeController@postManage',
             ]);
-
+            $router->post('subscribe/slack_manage/{code}', [
+                'as'   => 'post:subscribe.slack_manage',
+                'uses' => 'SubscribeController@postSlackManage',
+            ]);
             $router->get('subscribe/verify/{code}', [
                 'as'   => 'get:subscribe.verify',
                 'uses' => 'SubscribeController@getVerify',
