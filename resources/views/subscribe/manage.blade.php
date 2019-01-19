@@ -15,6 +15,7 @@
         <div class="text-center margin-bottom">
             <h1>{{ $appName }} {{ trans('cachet.subscriber.manage.notifications') }}</h1>
             <p>{{ trans('cachet.subscriber.manage.notifications_for') }} <strong>{{ $subscriber->email }}</strong></p>
+            <p>{{ trans('cachet.subscriber.manage.notifications_slack') }} <strong>{{ $subscriber->slack_webhook_url }}</strong></p>
         </div>
         <form action="{{ cachet_route('subscribe.manage', [$subscriber->verify_code], 'post') }}" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
