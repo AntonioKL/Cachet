@@ -39,6 +39,6 @@ final class UpdateSubscriberSlackSubscriptionCommand
     public function __construct($subscriber, $slack_url = null)
     {
         $this->subscriber = $subscriber;
-        $subscriber->slack_webhook_url = $slack_url;
+        $this->slack_url = $slack_url;
     }
 }
