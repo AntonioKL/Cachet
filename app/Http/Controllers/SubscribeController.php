@@ -218,7 +218,7 @@ class SubscribeController extends Controller
     }
 
     /**
-     * Updates the subscription manager for a subscriber.
+     * Updates the slack web hook URL for a subscriber.
      *
      * @param string|null $code
      *
