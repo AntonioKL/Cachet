@@ -84,6 +84,7 @@ return [
         'manage'              => [
             'notifications'       => 'Notifications',
             'notifications_for'   => 'Manage notifications for',
+            'notifications_slack' => 'Slack Hook',
             'no_subscriptions'    => 'You\'re currently subscribed to all updates.',
             'update_subscription' => 'Update Subscription',
             'my_subscriptions'    => 'You\'re currently subscribed to the following updates.',
