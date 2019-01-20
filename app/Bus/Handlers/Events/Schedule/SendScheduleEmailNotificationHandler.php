@@ -53,7 +53,7 @@ class SendScheduleEmailNotificationHandler
         $schedule = $event->schedule;
 
         // First notify all global subscribers.
-        $globalSubscribers = $this->subscriber->isVerified()->isGlobal()->get()->each(function ($subscriber) use ($schedule) {
+        $globalSubscribers = $this->subscriber->isVerified()->get()->each(function ($subscriber) use ($schedule) {
             $subscriber->notify(new NewScheduleNotification($schedule));
         });
     }
