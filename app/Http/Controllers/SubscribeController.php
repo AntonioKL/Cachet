@@ -16,6 +16,7 @@ use CachetHQ\Cachet\Bus\Commands\Subscriber\SubscribeSubscriberCommand;
 use CachetHQ\Cachet\Bus\Commands\Subscriber\UnsubscribeSubscriberCommand;
 use CachetHQ\Cachet\Bus\Commands\Subscriber\UnsubscribeSubscriptionCommand;
 use CachetHQ\Cachet\Bus\Commands\Subscriber\UpdateSubscriberSubscriptionCommand;
+use CachetHQ\Cachet\Bus\Commands\Subscriber\UpdateSubscriberSlackSubscriptionCommand;
 use CachetHQ\Cachet\Bus\Commands\Subscriber\VerifySubscriberCommand;
 use CachetHQ\Cachet\Models\Component;
 use CachetHQ\Cachet\Models\ComponentGroup;
@@ -213,6 +214,40 @@ class SubscribeController extends Controller
         }
 
         return cachet_redirect('subscribe.manage', $subscriber->verify_code)
-            ->withSuccess(sprintf('%s %s', trans('dashboard.notifications.awesome'), trans('cachet.subscriber.email.subscribed')));
+            ->withSuccess(sprintf('%s %s', trans('dashboard.notifications.awesome'), trans('cachet.subscriber.manage.updated_subscription')));
     }
+
+    /**
+     * Updates the slack web hook URL for a subscriber.
+     *
+     * @param string|null $code
+     *
+     * @return \Illuminate\View\View
+     */
+    public function postSlackManage($code = null)
+    {
+        if ($code === null) {
+            throw new NotFoundHttpException();
+        }
+
+        $subscriber = Subscriber::where('verify_code', '=', $code)->first();
+
+        if (!$subscriber) {
+            throw new BadRequestHttpException();
+        }
+
+        try {
+            execute(new UpdateSubscriberSlackSubscriptionCommand($subscriber, Binput::get('slack_webhook_url')));
+        } catch (ValidationException $e) {
+            return cachet_redirect('subscribe.manage', $subscriber->verify_code)
+                ->withInput(Binput::all())
+                ->withTitle(sprintf('%s %s', trans('dashboard.notifications.whoops'), trans('cachet.subscriber.email.failure')))
+                ->withErrors($e->getMessageBag());
+        }
+
+        return cachet_redirect('subscribe.manage', $subscriber->verify_code)
+            ->withSuccess(sprintf('%s %s', trans('dashboard.notifications.awesome'), trans('cachet.subscriber.manage.updated_slack')));
+    }
+    
+    
 }
